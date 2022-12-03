@@ -1,0 +1,62 @@
+<div class="row mb-5">
+    <div class="col-4 mt-3 " *ngFor="let item of userList ; let i = index">
+        <div class="card" style="width: 344px; height: 397px; min-height: 397px; max-height: 397px;">
+            <img class="card-img-top" src="{{item.picture}}" width="286" height="180" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"> {{item.first_name}} {{item.last_name}} </h5>
+                <h6>{{item.email}}</h6>
+                <p class="card-text"> {{item.designation}}</p>
+                <div class="py-2">
+                    <button (click)="getCurrentUserInfo(item)" href="#" class="btn btn-primary" data-toggle="modal"
+                        data-target="#EditModal">Edit</button>
+                    <button (click)="deleteUser(item.id, i)" class="btn btn-danger ml-5">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit {{selectedUser.first_name}} </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="first name">First Name</label>
+                        <input [(ngModel)]="selectedUser.first_name" value="{{selectedUser.first_name}}" type="text"
+                            class="form-control" id="first_tname" name="first_name" placeholder="First_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="last name">Last Name</label>
+                        <input [(ngModel)]="selectedUser.last_name" value="{{selectedUser.last_name}}" type="text"
+                            class="form-control" id="last_name" name="last_name" placeholder="Last name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input [(ngModel)]="selectedUser.email" value="{{selectedUser.email}}" type="text"
+                            class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="picture">Picture</label>
+                        <input [(ngModel)]="selectedUser.picture" value="{{selectedUser.picture}}" type="text"
+                            class="form-control" id="picture" name="picture" placeholder="picture">
+                    </div>
+                    <div class="form-group">
+                        <label for="designation">Designation</label>
+                        <textarea [(ngModel)]="selectedUser.designation" value="{{selectedUser.designation}}"
+                            class="form-control" id="designation" name="designation" placeholder="Designation">
+                        </textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="editUser()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
